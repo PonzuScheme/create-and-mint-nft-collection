@@ -17,21 +17,38 @@ const solanaMetadata = {
   ],
 };
 
-// If you have selected Solana then the collection starts from 0 automatically
-const layerConfigurations = [
-  {
-    growEditionSizeTo: 2,
-    layersOrder: [
-      { name: "Background" },
-      { name: "Eyeball" },
-      { name: "Eye color" },
-      { name: "Iris" },
-      { name: "Shine" },
-      { name: "Bottom lid" },
-      { name: "Top lid" },
-    ]
+const layerConfigurations = [{
+  growEditionSizeTo: 2,
+  layersOrder: [
+    { name: "Back" },
+    { name: "5SKIN" },
+    { name: "4OUTFIT" },
+    { name: "3HEAD" },
+    { name: "2EYES" },
+    { name: "1DECOHEAD" },
+  ],
+  incompatibleTraits: {
+    "3HEAD/HEAD03": [
+      "1DECOHEAD/*",
+    ],
   },
-];
+}];
+
+// // If you have selected Solana then the collection starts from 0 automatically
+// const layerConfigurations = [
+//   {
+//     growEditionSizeTo: 2,
+//     layersOrder: [
+//       { name: "Background" },
+//       { name: "Eyeball" },
+//       { name: "Eye color" },
+//       { name: "Iris" },
+//       { name: "Shine" },
+//       { name: "Bottom lid" },
+//       { name: "Top lid" },
+//     ]
+//   },
+// ];
 
 /* Example of configuration settings
 const layerConfigurations = [
@@ -75,7 +92,7 @@ const layerConfigurations = [
 
 const shuffleLayerConfigurations = false;
 
-const debugLogs = false;
+const debugLogs = true;
 
 const format = {
   width: 512,

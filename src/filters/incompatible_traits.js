@@ -29,7 +29,7 @@ const incompatibleTraitsUsed = (newTraits, incompatibleTraits) => {
         
         // Set true / false if the layer has a defined incompatibility
         const definedIncompatibilities = traitHasDefinedIncompatibilities(newTraits[i], incompatibleTraits);
-
+        
         // Check if incompatibilities were found for the layer
         if (definedIncompatibilities !== undefined) {
             
@@ -40,7 +40,7 @@ const incompatibleTraitsUsed = (newTraits, incompatibleTraits) => {
                 const [layer, trait] = definedIncompatibilities[n].split('/');
                 
                 // Check if the layer name and layer item combination can be found in the layer_name and layer_item json object and if it can be found, return true and stop processing further
-                if (simpleNewTraits[layer] === trait) {
+                if ((simpleNewTraits[layer] && trait === "*") || simpleNewTraits[layer] === trait) {
                     console.log("Combination of traits filtered because of incompatible layers filtration rule!");
                     return true;
                 }
