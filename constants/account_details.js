@@ -1,7 +1,7 @@
 // All values needs to be in single quotes
 const ACCOUNT_DETAILS = {
   auth: 'YOUR_NFTPORT_API_KEY_HERE', // Set your APIKey here that the NFTPort team will provide. Ex. orm1or1-efe1-112a-cccd-kqwfkfmk
-  contract_address: 'YOUR_CONTRACT_ADDRESS_HERE', // Set your contract address here, not your transaction hash. After creating a contract on NFTPort, retrieve the contract address via the APIs. Ex. 0xfe81cm1l28b21753ebe117c84als2d6588e150ff
+  contract_address: '', // Set your contract address here, not your transaction hash. After creating a contract on NFTPort, retrieve the contract address via the APIs. Ex. 0xfe81cm1l28b21753ebe117c84als2d6588e150ff
   mint_to_address: 'YOUR_WALLET_ADDRESS_HERE', // Set your wallet address here that will be the owner of the minted NFTs. Ex. 0x5cE5D823f4bD8Ec610293fBa65832B479152C7E1
   chain: 'CHAIN_TO_MINT_TO', // Set the chain where the NFTs will be minted to here. At the time of writing, "polygon" and "rinkeby" are possible values.
   max_rate_limit: '2', // Update your ratelimit linked to your APIKey / account from NFTPort. Ex. '1'

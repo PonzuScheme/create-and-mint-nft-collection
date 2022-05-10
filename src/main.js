@@ -113,7 +113,7 @@ const layersSetup = (layersOrder) => {
 const saveImage = (_editionCount) => {
   fs.writeFileSync(
     `${FOLDERS.imagesDir}/${_editionCount}.png`,
-    canvas.toBuffer("image/png")
+    canvas.toBuffer("image/png",{compressionLevel: 2, resolution: 72})
   );
 };
 

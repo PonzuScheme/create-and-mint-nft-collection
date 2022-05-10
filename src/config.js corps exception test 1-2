@@ -1,0 +1,1019 @@
+const BASEDIR = process.cwd();
+const { FOLDERS } = require(`${BASEDIR}/constants/folders.js`);
+const { MODE } = require(`${FOLDERS.constantsDir}/blend_mode.js`);
+const { NETWORK } = require(`${FOLDERS.constantsDir}/network.js`);
+
+const network = NETWORK.eth;
+
+const solanaMetadata = {
+  symbol: "STB",
+  seller_fee_basis_points: 1000, // Define how much % you want from secondary market sales 1000 = 10%
+  external_url: "YOUR_WEBSITE_URL_HERE", // Add your website URL here. Ex. https://thepeanutgalleryandco.co.za/
+  creators: [
+    {
+      address: "YOUR_WALLET_ADDRESS_HERE", // Add your owner wallet address here. Ex. 0x5cE5D823f4bD8Ec610868fBa65832B479152C7E1
+      share: 100,
+    },
+  ],
+};
+
+const layerConfigurations = [{
+  growEditionSizeTo: 200
+  ,
+  layersOrder: [
+    { name: "Background" },
+    { name: "Body" },
+    { name: "Body Gear" },
+
+// Backgrounds Incompatibilities
+
+  ],
+  incompatibleTraits: {
+    "Background/Light blue clouded": [
+      "Body/Aquarium",
+      "Body/Light blue",
+      // Body Gear
+      "Body Gear/Light bluepuffy",
+      "Body Gear/Light bluetee",
+    ],
+    "Background/Light green": [
+      "Body/Light green",
+      "Body/Open orange cat",
+      "Body/Levitating light green",
+      "Body/Light greenrandomYellow",
+      // Body Gear
+      "Body Gear/greenkimono", 
+    ],
+    "Background/Orange": [
+      "Body/Orange",
+      "Body/Orange two piece",
+      "Body/Open yellow random with hat",
+      "Body/Orange two piece",
+      // Body Gear
+      "Body Gear/Orangekraken"      
+    ],
+    "Background/Red": [
+      "Body/",
+      "Body/Open yellow cat",
+      // Body Gear
+      "Body Gear/redpoloshirt",
+      "Body Gear/red strawshirt",
+      "Body Gear/redsnake tee",
+      "Body Gear/red hoodie",
+      "Body Gear/redglueshirt",        
+      
+    ],
+    "Background/Violet": [
+      "Body/Violet",
+      "Body/Levitating violet",
+      // Body Gear
+      "Body Gear/Violet cattee",
+      "Body Gear/Violetkraken",
+      "Body Gear/Violetleopard",          
+
+    ],
+    "Background/Yellow": [
+      "Body/Yellow",
+      "Body/Yellow two piece",
+      "Body/Open green random",
+      // Body Gear
+      "Body Gear/yellowandblueshirt",
+      "Body Gear/yellowkraken",
+      "Body Gear/yellowglueshirt",
+      "Body Gear/yellowleopard"      
+
+    ],
+    "Background/Green": [
+      "Body/Green",
+      // Body Gear
+      "Body Gear/greenarmy hoodie",
+      "Body Gear/greenkimono",
+      "Body Gear/greenpoloshirt",
+      "Body Gear/greenpuffy",
+      "Body Gear/greenrags",
+      "Body Gear/greenandOrangesuit",
+    ],
+    "Background/Blue": [
+      "Body/straw",
+      // Body Gear
+      "Body Gear/bluedeathshirt",
+      "Body Gear/blueandpurparmytee",
+      "Body Gear/bluepuffy",
+      "Body Gear/bluerags",
+      "Body Gear/Blue randoms hoodie",
+    ],
+    "Background/Blue clouded": [
+      "Body/straw",
+      // Body Gear
+      "Body Gear/bluedeathshirt",
+      "Body Gear/bluepuffy",
+      "Body Gear/bluerags",
+      "Body Gear/Blue randoms hoodie",
+    ],
+    "Background/Yellow clouded": [
+      "Body/Yellow",
+      "Body/Yellow two piece",
+      "Body/Levitating yellow",
+      "Body/Open green random",
+      // Body Gear
+      "Body Gear/yellowandblueshirt",
+      "Body Gear/yellowkraken",
+      "Body Gear/yellowglueshirt",
+      "Body Gear/yellowleopard"
+    ],
+
+    // Body Incompatibilities ________________Body
+    "Body/Green": [
+      // Body Gear
+      "Body Gear/greenarmy hoodie",
+      "Body Gear/greenkimono",
+      "Body Gear/greenpoloshirt",
+      "Body Gear/greenpuffy",
+      "Body Gear/greenrags",
+      "Body Gear/greenandOrangesuit",
+    ],
+    "Body/Light blue": [
+      // Body Gear
+    "Body Gear/Light bluepuffy",
+    "Body Gear/Light bluetee",
+    ],
+    "Body/Light green": [
+    // Body Gear
+    "Body Gear/greenkimono", 
+    ],
+    "Body/Orange": [
+      // Body Gear
+    "Body Gear/Orangekraken", 
+    ],
+    "Body/": [
+      // Body Gear
+    "Body Gear/redpoloshirt",
+    "Body Gear/red strawshirt",
+    "Body Gear/redsnake tee",
+    "Body Gear/red hoodie",
+    "Body Gear/redglueshirt", 
+    ],
+    "Body/Violet": [
+      // Body Gear
+    "Body Gear/Violet cattee",
+    "Body Gear/Violetkraken",
+    "Body Gear/Violetleopard",,
+    ],
+    "Body/Yellow": [
+      // Body Gear
+    "Body Gear/yellowandblueshirt",
+    "Body Gear/yellowkraken",
+    "Body Gear/yellowglueshirt",
+    "Body Gear/yellowleopard",
+    "Body Gear/Yellow two pieceshirt",
+    ],
+        
+
+// ----------- ***** Final Traits ***** ----------
+// FINAL BODIES!!! 
+
+    "Body/straw": [
+      "Body Gear/*",
+    ],
+    "Body/Aquarium": [
+      "Body Gear/*",
+    ],
+    "Body/Open red cat": [
+      "Body Gear/*",
+    ],
+    "Body/Open orange cat": [
+      "Body Gear/*",
+    ],
+    "Body/Levitating light green": [
+      "Body Gear/*",
+    ],
+    "Body/Open yellow random": [
+      "Body Gear/*",
+    ],
+    "Body/Orange two piece": [
+      "Body Gear/*",
+    ],
+    "Body/Orange two piece": [
+      "Body Gear/*",
+    ],
+    "Body/Open yellow random with hat": [
+      "Body Gear/*",
+    ],
+    "Body/Open yellow cat": [
+      "Body Gear/*",
+    ],
+    "Body/Levitating violet": [
+      "Body Gear/*",
+    ],
+    "Body/Open green random wall eyed": [
+      "Body Gear/*",
+    ],
+    "Body/Violet two piece": [
+      "Body Gear/*",
+    ],
+    "Body/Yellow two piece": [
+      "Body Gear/*",
+    ],
+    "Body/Open green random": [
+      "Body Gear/*",
+    ],
+    "Body/Yellow two piece": [
+      "Body Gear/*",
+    ],
+      
+
+
+TEST 
+
+  ],
+    "Background/Light green": [
+      "Body/Light green",
+      "Body/Open orange cat",
+      "Body/Levitating light green",
+      "Body/Light greenrandomYellow",
+      // Body Gear
+      "Body Gear/greenkimono", 
+    ],
+    "Background/Orange": [
+      "Body/Orange",
+      "Body/Orange two piece",
+      "Body/Open yellow random with hat",
+      "Body/Orange two piece",
+      // Body Gear
+      "Body Gear/Orangekraken"      
+    ],
+    "Background/Red": [
+      "Body/",
+      "Body/Open yellow cat",
+      // Body Gear
+      "Body Gear/redpoloshirt",
+      "Body Gear/red strawshirt",
+      "Body Gear/redsnake tee",
+      "Body Gear/red hoodie",
+      "Body Gear/redglueshirt",        
+      
+    ],
+    "Background/Violet": [
+      "Body/Violet",
+      "Body/Levitating violet",
+      // Body Gear
+      "Body Gear/Violet cattee",
+      "Body Gear/Violetkraken",
+      "Body Gear/Violetleopard",          
+
+    ],
+    "Background/Yellow": [
+      "Body/Yellow",
+      "Body/Yellow two piece",
+      "Body/Open green random",
+      // Body Gear
+      "Body Gear/yellowandblueshirt",
+      "Body Gear/yellowkraken",
+      "Body Gear/yellowglueshirt",
+      "Body Gear/yellowleopard",      
+
+    ],
+    "Background/Green": [
+      "Body/Green",
+      // Body Gear
+      "Body Gear/greenarmy hoodie",
+      "Body Gear/greenkimono",
+      "Body Gear/greenpoloshirt",
+      "Body Gear/greenpuffy",
+      "Body Gear/greenrags",
+      "Body Gear/greenandOrangesuit",
+    ],
+    "Background/Blue": [
+      "Body/straw",
+      // Body Gear
+      "Body Gear/Bluedeathshirt",
+      "Body Gear/blueandpurparmytee",
+      "Body Gear/bluepuffy",
+      "Body Gear/bluerags",
+      "Body Gear/Blue randoms hoodie",
+    ],
+    "Background/Blue clouded": [
+      "Body/straw",
+      // Body Gear
+      "Body Gear/bluedeathshirt",
+      "Body Gear/bluepuffy",
+      "Body Gear/bluerags",
+      "Body Gear/Blue randoms hoodie",
+    ],
+    "Background/Yellow clouded": [
+      "Body/Yellow",
+      "Body/Yellow two piece",
+      "Body/Levitating yellow",
+      "Body/Open green random",
+      // Body Gear
+      "Body Gear/yellowandblueshirt",
+      "Body Gear/yellowkraken",
+      "Body Gear/yellowglueshirt",
+      "Body Gear/yellowleopard",
+      "Body Gear/Yellow two pieceshirt",
+      
+    ],
+    "Background/Beige": [
+      // Body Gear
+      "Body Gear/beigeclouds",
+      "Body Gear/beige hoodie",
+      "Body Gear/beigeIlovenfttee",
+      "Body Gear/beigewharoltee",
+      "Body Gear/beigeranjeanshirt"
+
+  },
+  dependentTraits: {
+    "5SKIN/SKIN01": [
+      "3HEAD/HEAD03",
+    ],
+  },
+}];
+
+// // If you have selected Solana then the collection starts from 0 automatically
+// const layerConfigurations = [
+//   {
+//     growEditionSizeTo: 2,
+//     layersOrder: [
+//       { name: "Background" },
+//       { name: "Eyeball" },
+//       { name: "Eye color" },
+//       { name: "Iris" },
+//       { name: "Shine" },
+//       { name: "Bottom lid" },
+//       { name: "Top lid" },
+//     ]
+//   },
+// ];
+
+/* Example of configuration settings
+const layerConfigurations = [
+  {
+    growEditionSizeTo: 2,
+    maxRepeatedTraits: 1,
+    layersOrder: [
+      { name: "Background" },
+      { name: "Eyeball" },
+      { name: "Eye color", maxRepeatedTrait: 2 },
+      { name: "Iris" },
+      { name: "Shine" },
+      { name: "Bottom lid", maxRepeatedTrait: 3 },
+      { name: "Top lid" },
+    ],
+    layerItemsMaxRepeatedTraits: [
+      { name: "Background/Black ", layerItemMaxRepeatedTrait: 4 },
+      { name: "Eyeball/Red", layerItemMaxRepeatedTrait: 5 }
+    ],
+    incompatibleTraits: {
+      "Eye color/Cyan": [
+        "Eyeball/Red",
+      ],
+      "Iris/Large": [
+        "Bottom lid/High",
+        "Top lid/High"
+      ],
+    },
+    dependentTraits: {
+      "Eye color/Cyan": [
+        "Eyeball/White",
+      ],
+      "Background/Blue": [
+        "Eyeball/Red",
+        "Top lid/low"
+      ],
+    }
+  },
+];
+*/
+
+const shuffleLayerConfigurations = false;
+
+const debugLogs = false;
+
+const format = {
+  width: 1080,
+  height: 1080,
+  smoothing: false,
+};
+
+const gif = {
+  export: false,
+  repeat: 0,
+  quality: 100,
+  delay: 500,
+};
+
+const text = {
+  only: false,
+  color: "#ffffff",
+  size: 20,
+  xGap: 40,
+  yGap: 40,
+  align: "left",
+  baseline: "top",
+  weight: "regular",
+  family: "Courier",
+  spacer: " => ",
+};
+
+const pixelFormat = {
+  ratio: 2 / 270,
+};
+
+const background = {
+  generate: false,
+  brightness: "80%",
+  static: false,
+  default: "#000000",
+};
+
+// These are additional items that will be added to each NFT. You can remove them or add new ones as well if needed.
+// Uncomment the lines if you would like to use these and update the details.
+const extraMetadata = {
+  //creator: "NFT_CREATOR_HERE", // Add the creator of the NFT collection here. Ex. The Peanut Gallery And Co
+  //external_url: "YOUR_WEBSITE_URL_HERE"  // Add your website URL here. This will be added to each of your NFTs. Ex. https://thepeanutgalleryandco.co.za/
+};
+
+const rarityDelimiter = "#";
+
+const uniqueDnaTorrance = 10000;
+
+const preview = {
+  thumbPerRow: 5,
+  thumbWidth: 50,
+  imageRatio: format.height / format.width,
+  imageName: "preview.png",
+};
+
+const preview_gif = {
+  numberOfImages: 5,
+  order: "ASC", // ASC, DESC, MIXED
+  repeat: 0,
+  quality: 100,
+  delay: 500,
+  imageName: "preview.gif",
+};
+
+module.exports = {
+  format,
+  background,
+  uniqueDnaTorrance,
+  layerConfigurations,
+  rarityDelimiter,
+  preview,
+  shuffleLayerConfigurations,
+  debugLogs,
+  extraMetadata,
+  pixelFormat,
+  text,
+  network,
+  solanaMetadata,
+  gif,
+  preview_gif,
+};
+
+
+
+ // $$$$$$$$$$ INVISIBLE Head EXCEPTIONS $$$$$$$ //
+    "Head/None": [
+      // Body Gear
+      "Body/Green",
+      "Body/straw",
+      "Body/Aquarium",
+      "Body/Open red cat",
+      "Body/Light green",
+      "Body/Open orange cat",
+      "Body/Levitating light green",
+      "Body/Open yellow random",
+      "Body/Orange two piece",
+      "Body/Orange",
+      "Body/Open yellow random with hat",
+      "Body/Orange two piece",
+      "Body/",
+      "Body/Open yellow cat",
+      "Body/Levitating violet",
+      "Body/Violet",
+      "Body/Open green random wall eyed",
+      "Body/Violet two piece",
+      "Body/Open green random",
+      "Body/Yellow",
+      "Body/Levitating yellow",
+      "Body/Yellow two piece",
+    ],
+
+    // !!!!!!!!! INVISIBLE NoneS EXCEPTIONS !!!!!!!! //
+    "Head Trait/NoneNone": [
+      // Body Gear
+      "Head/green ",
+      "Head/Light blue",
+      "Head/Light green ",
+      "Head/Orange head",
+      "Head/Red",
+      "Head/Violet",
+      "Head/Yellow",
+    ],
+
+  },
+  dependentTraits: {
+    "Body/Open green random": [
+      "Body Gear/None",
+    ],
+    "Body/straw": [
+      "Body Gear/None",
+    ],
+    "Body/Aquarium": [
+      "Body Gear/None",
+    ],
+    "Body/Open red cat": [
+      "Body Gear/None",
+    ],
+    "Body/Open orange cat": [
+      "Body Gear/None",
+    ],
+    "Body/Levitating light green": [
+      "Body Gear/None",
+    ],
+    "Body/Open yellow random": [
+      "Body Gear/None",
+    ],
+    "Body/Orange two piece": [
+      "Body Gear/None",
+    ],
+    "Body/Orange two piece": [
+      "Body Gear/None",
+    ],
+    "Body/Open yellow random with hat": [
+      "Body Gear/None",
+    ],
+    "Body/Open yellow cat": [
+      "Body Gear/None",
+    ],
+    "Body/Levitating violet": [
+      "Body Gear/None",
+    ],
+    "Body/Open green random wall eyed": [
+      "Body Gear/None",
+    ],
+    "Body/Violet two piece": [
+      "Body Gear/None",
+    ],
+    "Body/Yellow two piece": [
+      "Body Gear/None",
+    ],
+    "Body/Open green random": [
+      "Body Gear/None"
+    ],
+    "Body/Levitating yellow": [
+      "Body Gear/None"
+
+      // !!!!!!!!!! DEPENDENCIES HEADS !!!!!!!!!!!
+    ],
+    "Body/Green": [
+      "Head/green ",
+    ],
+    "Body/Light blue": [
+      "Head/Light blue"
+    ],
+    "Body/Light green": [
+      "Head/Light green "
+    ],
+    "Body/Orange": [
+      "Head/Orange head"
+    ],
+    "Body/": [
+      "Head/Readhead"
+    ],
+    "Body/Violet": [
+      "Head/Violet"
+    ],
+    "Body/Yellow": [
+      "Head/Yellow"
+    ],
+      // !!!!!!!!!!!!!! FINAL HEADS !!!!!!!!!!!!!!
+
+      "Head/Bee hive": [
+        "Head Trait/NoneNone"
+    ],
+    "Head/Yellow ape": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Violet box": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Violet cat": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Rubik box": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Red clock": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Red apple": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Pablo's face": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Orange cat": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Orange ape": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Light green cat": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Light blue cat": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Blue clock": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Blue ape": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/": [
+      "Head Trait/NoneNone"
+    ],
+    "Head/Beige box": [
+      "Head Trait/NoneNone"
+    ],
+  },
+}];
+
+
+ "Head/Bee hive": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Yellow ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Violet box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Violet cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Rubik box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Red clock": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Red apple": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Pablo's face": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Orange cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Orange ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Light green cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Light blue cat": [ 
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Blue clock": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Blue ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Beige box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+
+            // !!!!!!!!!!!!!! FINAL HEADS !!!!!!!!!!!!!!
+
+    "Head/Bee hive": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Yellow ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Violet box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Violet cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Rubik box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Red clock": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Red apple": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Pablo's face": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Orange cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Orange ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Light green cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Light blue cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Blue clock": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Blue ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Beige box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+
+          // !!!!!!!!!!!!!! FINAL HEADS !!!!!!!!!!!!!!
+
+    "Head/Bee hive": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Yellow ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Violet box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Violet cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Rubik box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Red clock": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Red apple": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Pablo's face": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Orange cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Orange ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Light green cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Light blue cat": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Blue clock": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Blue ape": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+    ],
+    "Head/Beige box": [
+      "Head Trait/NoneNone",
+      "Head Gear/None"
+
+    { name: "Head Trait" },
+    { name: "Head Gear" },
+    { name: "Ears" },
+
+          // !!!!!!!!!! DEPENDENCIES HEADS !!!!!!!!!!!
+    ],
+    "Body/Green": [
+      "Head/green ",
+    ],
+    "Body/Light blue": [
+      "Head/Light blue"
+    ],
+    "Body/Light green": [
+      "Head/Light green "
+    ],
+    "Body/Orange": [
+      "Head/Orange head"
+    ],
+    "Body/": [
+      "Head/Readhead"
+    ],
+    "Body/Violet": [
+      "Head/Violet"
+    ],
+    "Body/Yellow": [
+      "Head/Yellow"
+    ],
+
+
+
+if invisible head 
+ // $$$$$$$$$$ INVISIBLE Head EXCEPTIONS $$$$$$$ //
+    "Head/Blankhead": [
+      // Body Gear
+      "Body/Green",
+      "Body/Levitating blue",
+      "Body/Aquarium",
+      "Body/Open red cat",
+      "Body/Light green",
+      "Body/Open orange cat",
+      "Body/Levitating light green",
+      "Body/Open yellow random",
+      "Body/Orange two piece",
+      "Body/Orange",
+      "Body/Open yellow random with hat",
+      "Body/Orange two piece",
+      "Body/Red",
+      "Body/Open yellow cat",
+      "Body/Levitating violet",
+      "Body/Violet",
+      "Body/Open green random wall eyed",
+      "Body/Violet two piece",
+      "Body/Open green random",
+      "Body/Yellow",
+      "Body/Levitating yellow",
+      "Body/Yellow two piece",
+    ],
+
+
+    If needed ASTRONAUT
+
+
+// PPPPPPPPPPPPP    Astronaut    PPPPPPPPPPPPPPPPPP
+          "Body Gear/Astronaut": [
+            "Head Gear/Astronaut"
+            ], 
+
+     // !!!!!!!! +++++++++++  Astronaut Head Gear +++++++++++  !!!!!!!! //
+     "Head Gear/Astronaut": [
+      // Body Gear ---------------- CA C'EST TOUTES LES Head GearDS SI BESOIN
+      "Body Gear/Andy's banana tee",
+      "Body Gear/Beige flower",
+      "Body Gear/Beige green overalls",
+      "Body Gear/Beige hoodie",
+      "Body Gear/Beige ILOVENF tee",
+      "Body Gear/Beige Red pocket shirt",
+      "Body Gear/Beige work shirt",
+      "Body Gear/Beige smiley tee",
+      "Body Gear/Black light blue overalls",
+      "Body Gear/Blue cracked",
+      "Body Gear/Blue dripped", 
+      "Body Gear/Blue randoms hoodie",
+      "Body Gear/Blue puffy jacket",
+      "Body Gear/Blue scales",
+      "Body Gear/Bluesnake kimono",
+      "Body Gear/Blue stripped",
+      "Body Gear/Blue skull tee",
+      "Body Gear/Blue violet camo tee",
+      "Body Gear/Chain",
+      "Body Gear/Cloud",
+      "Body Gear/Earth",
+      "Body Gear/Eyed",
+      "Body Gear/Fire",
+      "Body Gear/Green camo hoodie",
+      "Body Gear/Green cracked",
+      "Body Gear/Green dripped",
+      "Body Gear/Green kimono",
+      "Body Gear/Green puffy jacket",
+      "Body Gear/Green school pull",
+      "Body Gear/Hairy",
+      "Body Gear/Tattoo",
+      "Body Gear/Hawaiian shirt",
+      "Body Gear/Heart necklace",
+      "Body Gear/Light blue open shirt",
+      "Body Gear/Light blue orange camo tee",
+      "Body Gear/Light blue puffy jacket",
+      "Body Gear/Light blue randoms tee",
+      "Body Gear/Light blue scarf",
+      "Body Gear/Light green scales",
+      "Body Gear/Light green snake ",
+      "Body Gear/Magritte suit",
+      "Body Gear/Maze",
+      "Body Gear/Mondrian",
+      "Body Gear/Mummy",
+      "Body Gear/None",
+      "Body Gear/Orange cracked",
+      "Body Gear/Orange octopus",
+      "Body Gear/Orange stripped",
+      "Body Gear/Red blue overalls",
+      "Body Gear/Red dripped",
+      "Body Gear/Red hoodie",
+      "Body Gear/Red kimono",
+      "Body Gear/Red school pull",
+      "Body Gear/Red tee snake",
+      "Body Gear/Red stripped",
+      "Body Gear/Red stripped snake ",
+      "Body Gear/Red stripped yellow scarf",
+      "Body Gear/Robot one",
+      "Body Gear/Robot two",
+      "Body Gear/Violet cat tee",
+      "Body Gear/Violet cracked",
+      "Body Gear/Violet octopus",
+      "Body Gear/Violet orange spotted",
+      "Body Gear/Violet blue pocket shirt",
+      "Body Gear/Yellow dripped",
+      "Body Gear/Yellow flower",
+      "Body Gear/Yellow octopus",
+      "Body Gear/Yellow orange spotted",
+      "Body Gear/Yellow orange spotted shirt",
+      "Body Gear/Yellow stripped",
+    ],
+
+
+
+
+    // Load modules and constants
+const fs = require("fs");
+const BASEDIR = process.cwd();
+const { FOLDERS } = require(`${BASEDIR}/constants/folders.js`);
+const { NFT_DETAILS } = require(`${FOLDERS.constantsDir}/nft_details.js`);
+
+// Load _metadata.json file and parse it as JSON
+let rawdata = fs.readFileSync(`${FOLDERS.jsonDir}/_metadata.json`);
+let data = JSON.parse(rawdata);
+
+// Loop through each json object in the _metadata.json file
+data.forEach((item) => {
+
+  // Update the file_url and image values that can be updated in the nft_details.js file.
+  item.file_url = `${NFT_DETAILS.imageFilesBase}/${item.custom_fields.edition}.png`;
+  item.image = `${NFT_DETAILS.imageFilesBase}/${item.custom_fields.edition}.png`;
+  
+  // Write the updated json file for the object edition
+  fs.writeFileSync(
+    `${FOLDERS.jsonDir}/${item.custom_fields.edition}.json`,
+    JSON.stringify(item, null, 2)
+  );
+
+  console.log(`${item.name} copied and updated!`);
+});
+
+// Write the updated _metadata.json file
+fs.writeFileSync(
+  `${FOLDERS.jsonDir}/_metadata.json`,
+  JSON.stringify(data, null, 2)
+);
+
+console.log(`Updated Base URI for images to ===> ${NFT_DETAILS.imageFilesBase}`);

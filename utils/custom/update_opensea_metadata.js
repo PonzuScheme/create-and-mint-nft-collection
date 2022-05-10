@@ -16,7 +16,7 @@ Polygon base URL - https://opensea.io/assets/matic/CONTRACT_ADDRESS/
 Ethereum base URL - https://opensea.io/assets/CONTRACT_ADDRESS/
 
 */
-const COLLECTION_BASE_URL = `https://opensea.io/assets/matic/${ACCOUNT_DETAILS.contract_address}/` ;
+const COLLECTION_BASE_URL = `https://testnets.opensea.io/assets/0xdb546d8a0f555690c0b59fda93c739647050d55b/` ;
 
 // Main function
 async function main() {
